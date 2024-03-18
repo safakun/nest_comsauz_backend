@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostsService } from './posts.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -6,6 +6,8 @@ import { ApiTags, ApiOperation, ApiResponse} from '@nestjs/swagger';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
+
+import { Request } from 'express';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -26,14 +28,24 @@ export class PostsController {
         return this.postService.create(dto, image)
     }
 
-    @ApiOperation({ summary: 'Get all posts' })
+    @ApiOperation({ summary: 'Get all posts with limit' })
     @ApiResponse({ status: 200, type: [Post] })
-    @Get('?')
-    getPosts(@Query('limit') limit: number) {
-        if (!limit) {
-           limit = 10;
-       }
-        return this.postService.getAllPosts(limit);
+    @Get()
+    getPosts(@Req() request: Request): Object {
+        let limit = 10;
+        if (request.query.limit) {
+            limit = Number(request.query.limit);
+        }
+        // @Query('limit') limit?: number
+        // if (limit > 0) {
+        //     return this.postService.getAllPosts(limit);
+        // } 
+            return this.postService.getAllPosts(limit);
+        
+    
+       
+
+       
     }
 
     @ApiOperation({ summary: 'Get one post' })
