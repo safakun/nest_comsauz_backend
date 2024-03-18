@@ -10,7 +10,7 @@ async function start() {
   const app = await NestFactory.create(AppModule) 
 
   const config = new DocumentBuilder()
-  .setTitle('NestJs backend advanced app')
+  .setTitle('NestJs backend for Comsa')
   .setDescription("REST API documentation")
   .setVersion('1.0.0')
   .addTag('Dmitry')

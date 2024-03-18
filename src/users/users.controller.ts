@@ -39,6 +39,7 @@ export class UsersController {
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
     // @UseGuards(JwtAuthGuard)
+    @UsePipes(ValidationPipe)
     @Post('/role')
     addRole(@Body() dto: AddRoleDto) {
         return this.usersService.addRole(dto);

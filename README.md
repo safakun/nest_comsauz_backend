@@ -14,6 +14,11 @@ npx sequelize-cli db:seed:all
 ```
 
 
+```json
+
+{ "title": "My new post",	"content": "New post content",	"keywords": "some, key, words",	"userId": 1,	"categoryId": 1}
+```
+
 .development.env
 .production.env
 .env

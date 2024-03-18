@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef} from '@nestjs/common';
+import { AuthModule } from 'src/auth/auth.module';
 import { Category } from './categories.model';
 import { CategoriesController } from './categories.controller';
 import { CategoriesService } from './categories.service';
@@ -9,6 +10,8 @@ import { Post } from 'src/posts/posts.model';
   controllers: [CategoriesController],
   providers: [CategoriesService,
   ...categoriesProviders],
-  imports: [Category, Post]
+  imports: [Category, Post, 
+    forwardRef(() => AuthModule)
+  ]
 })
 export class CategoriesModule {}
