@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostsService } from './posts.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -28,9 +28,12 @@ export class PostsController {
 
     @ApiOperation({ summary: 'Get all posts' })
     @ApiResponse({ status: 200, type: [Post] })
-    @Get()
-    getPosts() {
-        return this.postService.getAllPosts();
+    @Get('?')
+    getPosts(@Query('limit') limit: number) {
+        if (!limit) {
+           limit = 10;
+       }
+        return this.postService.getAllPosts(limit);
     }
 
     @ApiOperation({ summary: 'Get one post' })

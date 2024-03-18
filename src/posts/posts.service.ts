@@ -16,8 +16,9 @@ export class PostsService {
         return post;
     }
 
-    async getAllPosts() {
+    async getAllPosts(limit) {
         const posts = await this.postRepository.findAll({
+            limit: limit,
             include: {all: true}
         });
         return posts;
