@@ -1,9 +1,26 @@
 ### NestJs backend app for Comsa
+sudo docker rm -f $(docker ps -a -q) 
+
+sudo docker volume rm $(docker volume ls -q)
+
+- add seeder
+```bash
+npx sequelize-cli seed:generate --name demo-user
+```
+
+- commit seeders
+```bash
+npx sequelize-cli db:seed:all
+```
 
 
 .development.env
 .production.env
 .env
+
+
+TODO сделать миграции при инициализации бд - добавить роли ADMIN и USER
+
 
 ```javascript
 PORT=5000
