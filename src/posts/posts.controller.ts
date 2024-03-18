@@ -36,10 +36,7 @@ export class PostsController {
         if (request.query.limit) {
             limit = Number(request.query.limit);
         }
-        // @Query('limit') limit?: number
-        // if (limit > 0) {
-        //     return this.postService.getAllPosts(limit);
-        // } 
+  
             return this.postService.getAllPosts(limit);
         
     

@@ -14,17 +14,9 @@ npx sequelize-cli db:seed:all
 ```
 
 
-```json
-
-{ "title": "My new post",	"content": "New post content",	"keywords": "some, key, words",	"userId": 1,	"categoryId": 1}
-```
-
 .development.env
 .production.env
 .env
-
-
-TODO сделать миграции при инициализации бд - добавить роли ADMIN и USER
 
 
 ```javascript
@@ -40,10 +32,6 @@ SECRET_KEY=secret_key_safasf
 Запустить проект
 ```bash
 docker compose up
-```
-Остановить проект
-```bash
-docker compose down
 ```
 
 Документация swagger
