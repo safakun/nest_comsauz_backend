@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -8,6 +8,7 @@ import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { AddRoleDto } from './dto/add-role.dto';
 import { BanUserDto } from './dto/ban-user.dto';
+import { DeleteUserDto } from './dto/delete-user.dto';
 
 
 @ApiTags('Users')
@@ -52,5 +53,13 @@ export class UsersController {
     @Post('/ban')
     ban(@Body() dto: BanUserDto) {
         return this.usersService.ban(dto);
+    }
+
+    @ApiOperation({ summary: 'Admin can delete users' })
+    @ApiResponse({ status: 200 })
+    @Roles('ADMIN')
+    @Delete()
+    delete(@Body() dto: DeleteUserDto) {
+        return this.usersService.deleteUser(dto);
     }
 }

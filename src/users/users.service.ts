@@ -5,6 +5,7 @@ import { RolesService } from 'src/roles/roles.service';
 import { AddRoleDto } from './dto/add-role.dto';
 import { BanUserDto } from './dto/ban-user.dto';
 import { getRandomValues } from 'crypto';
+import { DeleteUserDto } from './dto/delete-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -57,6 +58,15 @@ export class UsersService {
         user.banReason = dto.banReason;
         await user.save();
         return user;
+    }
+
+    async deleteUser(dto: DeleteUserDto) {
+        const user = await this.userRepository.findByPk(dto.userId); 
+        if (!user) {
+            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+        }
+        await user.destroy();
+        return {"message": "User was deleted"};
     }
 }
 
