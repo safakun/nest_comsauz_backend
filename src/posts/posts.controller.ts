@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Post, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostsService } from './posts.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -25,4 +25,13 @@ export class PostsController {
     ) {
         return this.postService.create(dto, image)
     }
+
+    @ApiOperation({ summary: 'Get all posts' })
+    @ApiResponse({ status: 200, type: [Post] })
+    @Get()
+    getPosts() {
+        return this.postService.getAllPosts();
+    }
+
+
 }
