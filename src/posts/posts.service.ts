@@ -31,13 +31,34 @@ export class PostsService {
             include: {all: true}
         });
         if (!post) {
-            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+            throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
         }
         return post;
     }
 
-    // async update(dto: UpdatePostDto, image: any) {
+    async update(dto: UpdatePostDto, image: any) {
+        const post = await this.postRepository.findOne({
+            where: {id: Number(dto.postId)}
+        });
+        if (!post) {
+            throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
+        }
 
-    // }
+        if(!image) {
+
+        } 
+        post.title = dto.title;
+        post.content = dto.content;
+        post.categoryId = dto.categoryId;
+        post.keywords = dto.keywords;
+
+        await this.fileService.deleteFile(post.image);
+        const fileName = await this.fileService.createFile(image);
+        post.image = fileName;
+
+        await post.save();
+        return post;
+
+    }
 
 }

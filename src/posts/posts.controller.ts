@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors, UsePipes } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostsService } from './posts.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -8,6 +8,7 @@ import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 
 import { Request } from 'express';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -51,6 +52,19 @@ export class PostsController {
     getOnePost(@Param('id') id: number) {
         return this.postService.getPostById(id);
     }
+
+
+    @ApiOperation({ summary: 'Update a post' })
+    @ApiResponse({ status: 200, type: Post })
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
+    @UsePipes(ValidationPipe)
+    @Patch()
+    @UseInterceptors(FileInterceptor('image'))
+    updatePost(@Body() dto: UpdatePostDto, @UploadedFile() image) {
+        return this.postService.update(dto, image);
+    }
+
 
 
 }

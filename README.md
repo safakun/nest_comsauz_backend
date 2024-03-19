@@ -13,6 +13,10 @@ npx sequelize-cli seed:generate --name demo-user
 npx sequelize-cli db:seed:all
 ```
 
+TODO добавить функционал обновления поста с картинкой
+- обновить данные поста с новой картинкой
+- удалить старую картинку
+
 
 .development.env
 .production.env

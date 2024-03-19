@@ -19,4 +19,16 @@ export class FilesService {
             throw new HttpException('Error occured while writing the file', HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
+
+    async deleteFile(fileName: string) {
+        const filePath = path.resolve(__dirname, '..', 'static');
+        // delete a file asynchronously
+fs.unlink(path.join(filePath, fileName), (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('File is deleted.');
+    }
+  });
+    }
 }
