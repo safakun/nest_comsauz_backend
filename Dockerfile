@@ -10,8 +10,7 @@ RUN npm install
 
 COPY . . 
 
-# RUN npx sequelize-cli db:migrate
+RUN npx sequelize-cli db:seed:all
 
 # COPY ./dist ./dist
-# CMD ["npm", "run", "migrate"]
 CMD ["npm", "run", "start:dev"]

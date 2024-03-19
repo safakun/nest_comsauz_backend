@@ -1,7 +1,21 @@
-### NestJs backend app for Comsa
-sudo docker rm -f $(docker ps -a -q) 
+# NestJs backend app for Comsa.uz
+- by Dmitry https://t.me/jsdeemon
 
-sudo docker volume rm $(docker volume ls -q)
+
+### Запустить проект
+```bash
+docker compose up
+```
+
+### Документация swagger
+```bash
+http://localhost:5000/api/docs
+```
+- Коллекция http запросов (Insomnia) лежит в файле
+```bash
+insomnia_http_req_collection.json
+```
+
 
 - add seeder
 ```bash
@@ -13,16 +27,7 @@ npx sequelize-cli seed:generate --name demo-user
 npx sequelize-cli db:seed:all
 ```
 
-TODO добавить функционал обновления поста с картинкой
-- обновить данные поста с новой картинкой
-- удалить старую картинку
-
-
-.development.env
-.production.env
-.env
-
-
+- .env переменные (dev mode)
 ```javascript
 PORT=5000
 POSTGRES_HOST=postgres
@@ -33,40 +38,6 @@ POSTGRESS_PORT=5432
 SECRET_KEY=secret_key_safasf
 ```
 
-Запустить проект
-```bash
-docker compose up
-```
-
-Документация swagger
-```bash
-http://localhost:5000/api/docs
-```
-
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
 
 
 
