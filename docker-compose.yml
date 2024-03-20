@@ -32,8 +32,22 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: always
 
+  # My grafana service 
+  grafana:
+    build:
+      context: ./grafana
+    container_name: grafana
+    ports:
+      - 9000:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+  
+
 volumes:
   pgdata:
+  # Explicitly define the persistent volume for your data storage
+  grafana-data:
+    external: true
 
 
 

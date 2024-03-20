@@ -2,6 +2,11 @@
 - by Dmitry https://t.me/jsdeemon
 
 
+- Перед запуском нужно **создать docker volume для Grafana**
+```bash
+docker volume create grafana-data
+```
+
 ### Запустить проект
 ```bash
 docker compose up
@@ -19,6 +24,11 @@ insomnia_http_req_collection.json
 ### Prometheus metrics
 ```bash
 GET http://localhost:5000/mymetrics
+```
+
+### Grafana url
+```bash
+http://localhost:9000
 ```
 
 - add seeder
