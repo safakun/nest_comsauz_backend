@@ -11,6 +11,9 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from 'path';
 import { CategoriesModule } from "./categories/categories.module";
 import { PrometheusModule } from "@willsoto/nestjs-prometheus";
+import { AppService } from "./app.service";
+import { LoggingInterceptor } from "./logging.interceptor";
+import { APP_INTERCEPTOR } from "@nestjs/core";
 
 
 @Module( {
@@ -26,6 +29,13 @@ import { PrometheusModule } from "@willsoto/nestjs-prometheus";
         UserRoles, AuthModule, PostsModule, FilesModule, CategoriesModule, PrometheusModule.register({
             path: "/mymetrics"
         })
+    ],
+    providers: [
+        AppService,
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: LoggingInterceptor
+        }
     ],
 })
 export class AppModule {
