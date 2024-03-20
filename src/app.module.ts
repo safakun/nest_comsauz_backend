@@ -10,6 +10,7 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from 'path';
 import { CategoriesModule } from "./categories/categories.module";
+import { PrometheusModule } from "@willsoto/nestjs-prometheus";
 
 
 @Module( {
@@ -22,7 +23,9 @@ import { CategoriesModule } from "./categories/categories.module";
         }),
         UsersModule,
         RolesModule, 
-        UserRoles, AuthModule, PostsModule, FilesModule, CategoriesModule
+        UserRoles, AuthModule, PostsModule, FilesModule, CategoriesModule, PrometheusModule.register({
+            path: "/mymetrics"
+        })
     ],
 })
 export class AppModule {

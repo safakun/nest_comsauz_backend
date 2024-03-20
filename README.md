@@ -9,13 +9,17 @@ docker compose up
 
 ### Документация swagger
 ```bash
-http://localhost:5000/api/docs
+http://localhost:5000/api/docs 
 ```
 - Коллекция http запросов (Insomnia) лежит в файле
 ```bash
 insomnia_http_req_collection.json
 ```
 
+### Prometheus metrics
+```bash
+GET http://localhost:5000/mymetrics
+```
 
 - add seeder
 ```bash
