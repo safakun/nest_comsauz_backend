@@ -1,15 +1,32 @@
 # NestJs backend app for Comsa.uz
 - by Dmitry https://t.me/jsdeemon
 
-
-- Перед запуском нужно **создать docker volume для Grafana**
-```bash
-docker volume create grafana-data
-```
-
 ### Запустить проект
 ```bash
 docker compose up
+``` 
+
+### Запустить мониторинг
+```bash
+docker compose -f docker-compose.monitoring.yml up
+```
+### Pronetheus URL
+```bash
+http://localhost:9090
+``` 
+
+### Grafana URL
+```bash
+http://localhost:3000
+```
+
+- Grafana credentials for first launch:
+- login - admin
+- password - admin
+
+- In Grafana add following Prometheus url:
+```bash
+http://prometheus:9090
 ```
 
 ### Документация swagger
@@ -24,11 +41,6 @@ insomnia_http_req_collection.json
 ### Prometheus metrics
 ```bash
 GET http://localhost:5000/mymetrics
-```
-
-### Grafana url
-```bash
-http://localhost:9000
 ```
 
 - add seeder
