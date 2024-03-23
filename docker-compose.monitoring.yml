@@ -20,8 +20,8 @@ services:
       - /data/prometheus:/prometheus
 
   prometheus:
-    # image: prom/prometheus:v2.37.7
-    image: prom/prometheus:v2.37.9
+    image: prom/prometheus:v2.37.7
+    # image: prom/prometheus:v2.37.9
     container_name: prometheus
     volumes:
       - ./monitoring_config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
